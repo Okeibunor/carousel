@@ -1,0 +1,77 @@
+*,*::before,*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container{
+    padding: 10vh 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card{
+    display: flex;
+    justify-content: center;
+    margin: 2vh auto;
+}
+
+.card .buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background:white;
+}
+
+.card .buttons li{
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    background: white;
+    color: red;
+    list-style-type: none;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px grey;
+    transition: all 1s;
+}
+
+.card .buttons li.active{
+    background-color:rgb(112, 29, 29);
+    
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    height: 70vh;
+}
+
+.box img{
+    width: 10%;
+    height: 50px;
+    object-fit: contain;
+}
+
+.slider{
+    width: 80%;
+    height: 100%;
+}
+
+.slide{
+    opacity: 0;
+    height: 0;
+    width: 0;
+    position: fixed;
+}
+
+.slide.active{
+    position: unset;
+    display: block;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1.5s linear;
+}
