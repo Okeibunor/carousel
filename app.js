@@ -1,5 +1,4 @@
 let slides = document.querySelectorAll('.slide');
-// let buttons = document.querySelectorAll('.buttons li')
 let button = document.querySelector('.buttons')
 let left = document.querySelector('#leftarrow');
 let right = document.querySelector('#rightarrow');
@@ -67,25 +66,14 @@ function positionInArray(a,array){
     return null;
 }
 
-
-
-//button slide interaction
-firstButton = document.querySelector('#\\31 ');
-firstButton.addEventListener('click',function(e){
-    document.querySelector('.slide.active').classList.remove('active')
-    slides.forEach(element => {
-        if(positionInArray(element,slides) == 0){
-            element.classList.add('active');
-        }
-    });
-    
-   
-
-    e.preventDefault();
-})
-
 button.addEventListener('click', function (e) { 
     if (e.target.tagName == 'LI') { 
-        console.log('fired')
+        document.querySelector('.buttons li.active').classList.remove('active');
+        document.querySelector(`#\\3${e.target.id} `).classList.add('active');
+        document.querySelector('.slide.active').classList.remove('active');
+        newSlide = slides[e.target.id]
+        newSlide.classList.add('active');
+        clearInterval(intervalId);
+        intervalId = setInterval(goRight,10000);
     }
 })
