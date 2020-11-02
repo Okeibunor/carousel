@@ -1,59 +1,61 @@
 let slides = document.querySelectorAll('.slide');
 // let buttons = document.querySelectorAll('.buttons li')
-// let button = document.querySelector('.buttons')
+let button = document.querySelector('.buttons')
 let left = document.querySelector('#leftarrow');
 let right = document.querySelector('#rightarrow');
 
 
-setInterval(function(){
-    let currentSlide = document.querySelector('.slide.active');
-    position = positionInArray(currentSlide,slides)
-    if(position <  slides.length - 1){
-        newSlide =  slides[position + 1];
-        currentSlide.classList.remove('active');
-        newSlide.classList.add('active');
-    }
-    else{
-        newSlide = slides[0];
-        currentSlide.classList.remove('active');
-        newSlide.classList.add('active')
-    }
-},10000);
+let intervalId = setInterval(goRight,10000);
 
-left.addEventListener('click',goLeft);
-right.addEventListener('click',goRight)
+left.addEventListener('click', function (e) { 
+    goLeft();
+    clearInterval(intervalId);
+    intervalId = setInterval(goRight,10000);
+    e.preventDefault()
+});
 
-function goLeft(e){
+right.addEventListener('click', function (e) { 
+    goRight();
+    clearInterval(intervalId);
+    intervalId = setInterval(goRight,10000);
+    e.preventDefault();
+})
+
+function goLeft(){
     let currentSlide = document.querySelector('.slide.active');
+    let newSlide;
     position = positionInArray(currentSlide,slides)
     if(position > 0){
-        newSlide =  slides[position - 1];
+        newSlide = slides[position - 1];
+        document.querySelector('.buttons li.active').classList.remove('active');
+        document.querySelector(`#\\3${position -1} `).classList.add('active');
     }
     else{
         newSlide = slides[slides.length - 1]
+        document.querySelector('.buttons li.active').classList.remove('active');
+        document.querySelector(`#\\3${slides.length - 1} `).classList.add('active');
     }
     currentSlide.classList.remove('active');
     newSlide.classList.add('active');
-
-    
-    document.querySelector('.buttons li.active').classList.remove('active');
-    document.querySelector(`.buttons ${positionInArray}`).classList.add('active');
-
-    e.preventDefault();
 }
-function goRight(e){
+
+function goRight(){
     let currentSlide = document.querySelector('.slide.active');
     position = positionInArray(currentSlide,slides)
     if(position <  slides.length - 1){
-        newSlide =  slides[position + 1];
+        newSlide = slides[position + 1];
+        document.querySelector('.buttons li.active').classList.remove('active');
+        document.querySelector(`#\\3${position + 1} `).classList.add('active');
     }
     else{
         newSlide = slides[0];
+        document.querySelector('.buttons li.active').classList.remove('active');
+        document.querySelector(`#\\3${0} `).classList.add('active');
     }
     currentSlide.classList.remove('active');
     newSlide.classList.add('active');
-    e.preventDefault();
 }
+
 
 function positionInArray(a,array){
     for (let index = 0; index < array.length; index++) {
@@ -65,8 +67,10 @@ function positionInArray(a,array){
     return null;
 }
 
+
+
 //button slide interaction
-firstButton = document.querySelector('#one');
+firstButton = document.querySelector('#\\31 ');
 firstButton.addEventListener('click',function(e){
     document.querySelector('.slide.active').classList.remove('active')
     slides.forEach(element => {
@@ -80,3 +84,8 @@ firstButton.addEventListener('click',function(e){
     e.preventDefault();
 })
 
+button.addEventListener('click', function (e) { 
+    if (e.target.tagName == 'LI') { 
+        console.log('fired')
+    }
+})
